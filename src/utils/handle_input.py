@@ -1,6 +1,7 @@
 NUMERIC = int | float
+DEFAULT = ["Nhập x: ", "Nhập y: ", "Nhập z: "]
 
-class MathVarsInput:
+class HandleInput:
     """
         TwoVarsForMath: xử lý đầu vào của 1, 2 hoặc 3 biến cho các phép tính toán học.\n
         Kiểu dữ liệu hỗ trợ: @int, @float
@@ -12,29 +13,28 @@ class MathVarsInput:
         self._z: NUMERIC = None
         self.retry = 0
 
-    def handle_input(self, n_args: int = 2) -> None:
+    def handle_input(self, n_inputs: int = 2, prompts: list[str] = DEFAULT) -> None:
         """
-        Nhập vào 1, 2 hoặc 3 biến số thực dương. n_args: số lượng biến cần nhập (1, 2 hoặc 3)
+        Nhập vào 1, 2 hoặc 3 biến số thực dương. n_inputs: số lượng biến cần nhập (1, 2 hoặc 3)
         """
-        if n_args < 1 or n_args > 3:
+
+        if n_inputs < 1 or n_inputs > 3:
             raise ValueError("Chỉ hỗ trợ nhập 1, 2 hoặc 3 đối số.")
         while True:
             try:
                 values = []
-                prompts = ["Nhập x: ", "Nhập y (tùy chọn): ", "Nhập z (tùy chọn): "]
-                for i in range(n_args):
+                # prompts = ["Nhập x: ", "Nhập y (tùy chọn): ", "Nhập z (tùy chọn): "]
+                for i in range(n_inputs):
                     val = float(input(prompts[i]))
-                    if val <= 0:
-                        raise ValueError("Giá trị phải là số dương.")
                     values.append(val)
                 # Gán giá trị
-                self.setterX(values[0])
-                if n_args >= 2:
-                    self.setterY(values[1])
+                self.setter_x(values[0])
+                if n_inputs >= 2:
+                    self.setter_y(values[1])
                 else:
                     self._y = None
-                if n_args == 3:
-                    self.setterZ(values[2])
+                if n_inputs == 3:
+                    self.setter_z(values[2])
                 else:
                     self._z = None
                 break
@@ -44,26 +44,26 @@ class MathVarsInput:
                     raise Exception("Người dùng thử quá nhiều lần. Vui lòng chạy lại chương trình")
                 print(f"Lỗi: {e} Hãy nhập lại.")
 
-    def getterX(self) -> NUMERIC:
+    def getter_x(self) -> NUMERIC:
         return self._x
 
-    def getterY(self) -> NUMERIC:
+    def getter_y(self) -> NUMERIC:
         return self._y
 
-    def getterZ(self) -> NUMERIC:
+    def getter_z(self) -> NUMERIC:
         return self._z
 
-    def setterX(self, x) -> None:
+    def setter_x(self, x) -> None:
         if not isinstance(x, (int, float)):
             raise TypeError("x bắt buộc phải là int hoặc float")
         self._x = x
 
-    def setterY(self, y) -> None:
+    def setter_y(self, y) -> None:
         if y is not None and not isinstance(y, (int, float)):
             raise TypeError("y bắt buộc phải là int hoặc float")
         self._y = y
 
-    def setterZ(self, z) -> None:
+    def setter_z(self, z) -> None:
         if z is not None and not isinstance(z, (int, float)):
             raise TypeError("z bắt buộc phải là int hoặc float")
         self._z = z

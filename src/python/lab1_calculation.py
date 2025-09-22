@@ -1,7 +1,7 @@
 import math
-from src.utils.handle_input import MathVarsInput
+from dat2011_little_fox28.src.utils.handle_input import HandleInput
 
-class Calculation(MathVarsInput):
+class Calculation(HandleInput):
     """
         Đối tượng thực hiện các phép toán cơ bản.
         Kiểu dữ liệu hỗ trợ: @int, @float.
@@ -11,44 +11,44 @@ class Calculation(MathVarsInput):
 
     # Basic calculation
     def addition(self) -> float:
-        return math.fsum([self.getterX(), self.getterY()])
+        return math.fsum([self.getter_x(), self.getter_y()])
     def subtraction(self) -> float:
-        return math.fsum([self.getterX(), -self.getterY()])
+        return math.fsum([self.getter_x(), -self.getter_y()])
     def multiplication(self) -> float:
-        if self.getterX() == 0 or self.getterY() == 0:
+        if self.getter_x() == 0 or self.getter_y() == 0:
             return 0
-        return math.prod([self.getterX(), self.getterY()])
+        return math.prod([self.getter_x(), self.getter_y()])
     def division(self) -> float:
-        if self.getterX() == 0:
+        if self.getter_x() == 0:
             return 0
-        if self.getterY() == 0:
+        if self.getter_y() == 0:
             return float('Một số không nên chia cho 0!')
-        return math.trunc(self.getterY() / self.getterX())
+        return math.trunc(self.getter_y() / self.getter_x())
     def division_with_remainder(self) -> float:
-        if self.getterX() == 0:
+        if self.getter_x() == 0:
             return 0
-        if self.getterY() == 0:
+        if self.getter_y() == 0:
             return float('Một số không nên chia cho 0!')
-        return math.remainder(self.getterY(), self.getterX())
+        return math.remainder(self.getter_y(), self.getter_x())
     
     # Advance calculation
     def exponentiation(self) -> float:
-        return math.pow(self.getterX(), self.getterY())
+        return math.pow(self.getter_x(), self.getter_y())
     def square_root(self) -> float:
-        return math.sqrt(self.getterX())
+        return math.sqrt(self.getter_x())
     
     # Trigonometric functions
     def sine(self) -> float:
-        return math.sin(self.getterX())
+        return math.sin(self.getter_x())
     def cosine(self) -> float:
-        return math.cos(self.getterX())
+        return math.cos(self.getter_x())
     def tangent(self) -> float:
-        return math.tan(self.getterX())
+        return math.tan(self.getter_x())
     
     # Logarithm functions
     def log10(self) -> float:
-        return math.log10(self.getterX())
+        return math.log10(self.getter_x())
     def ln(self) -> float:
-        return math.log(self.getterX())
+        return math.log(self.getter_x())
     def log_base(self) -> float:
-        return math.log(self.getterX(), self.getterY())
+        return math.log(self.getter_x(), self.getter_y())
