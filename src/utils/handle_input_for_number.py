@@ -1,17 +1,24 @@
 NUMERIC = int | float
 DEFAULT = ["Nhập x: ", "Nhập y: ", "Nhập z: "]
 
-class HandleInput:
+class HandleInputForNumber:
     """
-        TwoVarsForMath: xử lý đầu vào của 1, 2 hoặc 3 biến cho các phép tính toán học.\n
-        Kiểu dữ liệu hỗ trợ: @int, @float
-        Cho phép nhập 1, 2 hoặc 3 đối số, trong đó đối số 2 và 3 là tùy chọn.
+    HandleInputForNumber: xử lý đầu vào của 1, 2 hoặc 3 biến số.\n
+    Kiểu dữ liệu hỗ trợ: @int, @float
+    Cho phép nhập 1, 2 hoặc 3 đối số, trong đó đối số 2 và 3 là tùy chọn.
     """
     def __init__(self):
         self._x: NUMERIC = 1
         self._y: NUMERIC = None
         self._z: NUMERIC = None
         self.retry = 0
+
+    def validate_input(self, value) -> bool:
+        return isinstance(value, (int, float))
+
+    def convert_input(self, value: str) -> NUMERIC:
+        return float(value)
+
 
     def handle_input(self, n_inputs: int = 2, prompts: list[str] = DEFAULT) -> None:
         """

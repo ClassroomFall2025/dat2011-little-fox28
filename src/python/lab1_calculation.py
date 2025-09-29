@@ -1,5 +1,5 @@
 import math
-from dat2011_little_fox28.src.utils.handle_input import HandleInput
+from dat2011_little_fox28.src.utils.handle_input_for_number import HandleInput
 
 class Calculation(HandleInput):
     """
