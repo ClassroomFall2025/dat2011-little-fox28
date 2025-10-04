@@ -1,5 +1,5 @@
-from dat2011_little_fox28.src.python.calculation import OthersFeature, Calculation
-from dat2011_little_fox28.src.utils.highlight import highlight_text, highlight_warning
+from src.python.calculation import OthersFeature, Calculation
+from src.utils.highlight import highlight_text, highlight_warning
 
 
 def display_menu(options: dict) -> None:
@@ -37,7 +37,7 @@ def menu() -> None:
         "14": {"text": "Phương trình bậc 1 (ax + b = 0)", "method": calc.first_degree_equation, "inputs": 2, "prompts": ["Nhập a: ", "Nhập b: "]},
         "15": {"text": "Phương trình bậc hai (ax^2 + bx + c = 0)", "method": calc.square_root_equation, "inputs": 3, "prompts": ["Nhập a: ", "Nhập b: ", "Nhập c: "]},
         "16": {"text": "Thời gian hiện tại", "method": others_feature.get_time},
-        "17": {"text": "Xem lịch sử", "method": others_feature.view_history},
+        "17": {"text": "Xem lịch sử", "method": others_feature.get_history},
     }
 
     while True:
@@ -58,7 +58,6 @@ def menu() -> None:
                 if num_inputs is not None and num_inputs > 0:
                     prompts = option.get("prompts", ["Nhập x: ", "Nhập y: ", "Nhập z: "])
                     calc.handle_input(num_inputs, prompts)
-                    # Get inputs for history
                     if num_inputs >= 1:
                         inputs_for_history.append(calc.getter_x())
                     if num_inputs >= 2:
@@ -69,10 +68,10 @@ def menu() -> None:
                 result = method()
                 print(highlight_warning(f"Kết quả: {result}"))
 
-                # Save to history
-                if "inputs" in option:
-                    operation_name = option["text"]
-                    others_feature.save_to_history(operation_name, inputs_for_history, result)
+                # Lưu lịch sử
+                if choice != str(len(menu_options)):
+                    others_feature.history(option.get("text"), result, inputs_for_history)
+
             except Exception as e:
                 print(f"Lỗi: {e}")
         else:

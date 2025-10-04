@@ -1,6 +1,5 @@
 import math
 import datetime
-import os
 from typing import Union
 
 from ..utils.handle_input_for_number import HandleInputForNumber
@@ -14,9 +13,6 @@ class Calculation(HandleInputForNumber):
     """
     def __init__(self):
         super().__init__()
-
-    def hello(self):
-        return self.getter_x()
 
     # Basic calcualtion
     def addition(self) -> float:
@@ -124,29 +120,41 @@ class Calculation(HandleInputForNumber):
 
 class OthersFeature:
     def __init__(self):
-        self.history_file = "src/public/history.txt"
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(self.history_file), exist_ok=True)
-        # Create file if not exists
-        if not os.path.exists(self.history_file):
-            with open(self.history_file, 'w', encoding='utf-8') as f:
-                pass
+        self._log = []
 
     def get_time(self):
+        """
+            Lấy thời gian hiện tại
+        """
         return datetime.datetime.now().strftime("%d/%m/%Y - %Hh:%Mm:%Ss")
 
-    def save_to_history(self, operation, inputs, result):
-        """Saves a calculation to the history file."""
-        with open(self.history_file, 'a', encoding='utf-8') as f:
-            timestamp = self.get_time()
-            result_str = str(result) if result is not None else "N/A"
-            log_entry = f"[{timestamp}] | {operation} | Inputs: {inputs} | Result: {result_str}\n"
-            f.write(log_entry)
+    def history(self, feature_name: str, result: any, inputs: list):
+        """
+            Lưu lại lịch sử các phép tính
+        """
+        log_entry = {
+            "timestamp": self.get_time(),
+            "feature": feature_name,
+            "inputs": inputs,
+            "result": result
+        }
+        self._log.append(log_entry)
 
-    def view_history(self):
-        """Reads and returns the calculation history."""
-        with open(self.history_file, 'r', encoding='utf-8') as f:
-            history = f.read()
-            if not history:
-                return "Lịch sử trống."
-            return f"--- Lịch sử tính toán ---\n{history}"
+    def get_history(self):
+        """
+            Lấy lịch sử các phép tính
+        """
+        if not self._log:
+            return "Lịch sử trống."
+        
+        history_str = "--- Lịch sử tính toán ---\n"
+        for entry in self._log:
+            inputs_str = ", ".join(map(str, entry["inputs"]))
+
+            history_str += f"[{entry['timestamp']}] {entry['feature']}"
+            if entry['inputs']:
+                 history_str += f" với đầu vào ({inputs_str})"
+            history_str += f" -> Kết quả: {entry['result']}\n"
+
+        history_str += "--------------------------"
+        return history_str
