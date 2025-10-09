@@ -1,4 +1,4 @@
-from dat2011_little_fox28.src.utils.highlight import highlight_text, highlight_warning
+from ..utils.highlight import highlight_text, highlight_warning
 from .calculation import Calculation, OthersFeature
 
 
