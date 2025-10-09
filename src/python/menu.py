@@ -1,5 +1,5 @@
-from src.python.calculation import OthersFeature, Calculation
-from src.utils.highlight import highlight_text, highlight_warning
+from dat2011_little_fox28.src.utils.highlight import highlight_text, highlight_warning
+from .calculation import Calculation, OthersFeature
 
 
 def display_menu(options: dict) -> None:

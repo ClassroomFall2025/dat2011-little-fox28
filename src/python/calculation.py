@@ -2,8 +2,8 @@ import math
 import datetime
 from typing import Union
 
-from ..utils.handle_input_for_number import HandleInputForNumber
-from ..utils.highlight import highlight_text
+from utils.handle_input_for_number import HandleInputForNumber
+from utils.highlight import highlight_text
 
 
 class Calculation(HandleInputForNumber):
@@ -158,3 +158,7 @@ class OthersFeature:
 
         history_str += "--------------------------"
         return history_str
+
+
+def get_time():
+    return None

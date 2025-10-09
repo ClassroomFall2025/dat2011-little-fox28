@@ -76,6 +76,3 @@ def menu_cli() -> None:
                 print(f"Lỗi: {e}")
         else:
             print(f"Chọn các số từ 0 - {len(menu_options)}")
-
-if __name__ == '__main__':
-    menu_cli()
