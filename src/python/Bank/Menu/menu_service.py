@@ -229,11 +229,13 @@ class MenuService(MenuInterface, AccountService):
         self.account_statement() # Same functionality
 
     def backup_data(self):
-backup_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'backup')
+        """Sao lưu dữ liệu hiện tại."""
+        try:
+            backup_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'backup')
             if not os.path.exists(backup_dir):
                 os.makedirs(backup_dir)
 
-            timestamp = datetime.now().strftime("dd/mm/yyyy")
+            timestamp = datetime.now().strftime("%d%m%Y_%H%M%S")
             backup_file_name = f"taikhoan_{timestamp}.csv"
             backup_file_path = os.path.join(backup_dir, backup_file_name)
 
@@ -243,7 +245,6 @@ backup_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file
                 for account in self.account_list:
                     writer.writerow(account.to_dict())
             
-            self._csv_account_writer()
             print(f"Sao lưu dữ liệu thành công vào: {backup_file_path}")
         except Exception as e:
             print(f"Lỗi khi sao lưu: {e}")
