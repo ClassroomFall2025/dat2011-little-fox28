@@ -1,3 +1,13 @@
+#IDE
+.idea
+
+# Learn
+test.py
+resource.txt
+
+#Intellectual property - IP
+git_message.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
